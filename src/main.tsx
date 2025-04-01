@@ -12,9 +12,10 @@ import { handleServerError } from '@/utils/handle-server-error'
 import { toast } from '@/hooks/use-toast'
 import { FontProvider } from './context/font-context'
 import { ThemeProvider } from './context/theme-context'
-import './index.css'
+import './global.css'
 // Generated Routes
 import { routeTree } from './routeTree.gen'
+import { AntdAdapter } from './theme/adapter/antd.adapter'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -100,7 +101,9 @@ if (!rootElement.innerHTML) {
       <QueryClientProvider client={queryClient}>
         <ThemeProvider defaultTheme='light' storageKey='vite-ui-theme'>
           <FontProvider>
-            <RouterProvider router={router} />
+            <AntdAdapter>
+              <RouterProvider router={router} />
+            </AntdAdapter>
           </FontProvider>
         </ThemeProvider>
       </QueryClientProvider>
